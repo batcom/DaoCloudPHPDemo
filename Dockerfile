@@ -1,16 +1,53 @@
-FROM php:5.6-apache
-# Docker 官方PHP5.6+apache发行版本，底层系统使用Debian
+# Pull base image.
+FROM ubuntu:14.04
 
-# 道客船长荣誉出品
-MAINTAINER Captain Dao (support@daocloud.io)
+# Install.
+RUN \
+  #sed -i 's/# \(.*multiverse$\)/\1/g' /etc/apt/sources.list && \
+#163 src
+  #sed -i '1ideb http://mirrors.163.com/ubuntu/ trusty main restricted universe multiverse\ndeb http://mirrors.163.com/ubuntu/ trusty-security main restricted universe multiverse\ndeb http://mirrors.163.com/ubuntu/ trusty-updates main restricted universe multiverse\ndeb http://mirrors.163.com/ubuntu/ trusty-proposed main restricted universe multiverse\ndeb http://mirrors.163.com/ubuntu/ trusty-backports main restricted universe multiverse\ndeb-src http://mirrors.163.com/ubuntu/ trusty main restricted universe multiverse\ndeb-src http://mirrors.163.com/ubuntu/ trusty-security main restricted universe multiverse\ndeb-src http://mirrors.163.com/ubuntu/ trusty-updates main restricted universe multiverse\ndeb-src http://mirrors.163.com/ubuntu/ trusty-proposed main restricted universe multiverse\ndeb-src http://mirrors.163.com/ubuntu/ trusty-backports main restricted universe multiverse' /etc/apt/sources.list && \
+  echo -n 'deb http://mirrors.163.com/ubuntu/ trusty main restricted universe multiverse\ndeb http://mirrors.163.com/ubuntu/ trusty-security main restricted universe multiverse\ndeb http://mirrors.163.com/ubuntu/ trusty-updates main restricted universe multiverse\ndeb http://mirrors.163.com/ubuntu/ trusty-proposed main restricted universe multiverse\ndeb http://mirrors.163.com/ubuntu/ trusty-backports main restricted universe multiverse\ndeb-src http://mirrors.163.com/ubuntu/ trusty main restricted universe multiverse\ndeb-src http://mirrors.163.com/ubuntu/ trusty-security main restricted universe multiverse\ndeb-src http://mirrors.163.com/ubuntu/ trusty-updates main restricted universe multiverse\ndeb-src http://mirrors.163.com/ubuntu/ trusty-proposed main restricted universe multiverse\ndeb-src http://mirrors.163.com/ubuntu/ trusty-backports main restricted universe multiverse\ndeb http://packages.dotdeb.org stable all \ndeb-src http://packages.dotdeb.org stable all' > /etc/apt/sources.list && \
+  apt-get install -y curl git htop man unzip vim wget && \
+  wget http://www.dotdeb.org/dotdeb.gpg && \
+  cat dotdeb.gpg | apt-key add - && \
+  apt-get update && \
+  apt-get -y upgrade && \
+  apt-get install -y build-essential openssh-server openssh-client && \
+  apt-get install -y software-properties-common && \
+  apt-get update && \
+  apt-get -y upgrade && \
+  apt-get install -y php5-cli php5-fpm php5-mysql php5-pgsql php5-sqlite php5-curl php5-gd php5-mcrypt php5-intl php5-imap php5-tidy php*-pear php5-odbc php5-mhash libmcrypt* libmcrypt-dev php5-common php5-ming php5-ps php5-snmp php5-json php5-dev libcurl3-openssl-dev php5-imagick php5-memcache php5-pspell php5-recode php5-xmlrpc php5-xsl php5-mongo php5-redis && \
+  apt-get install -y nginx chkconfig mysql-server mysql-client && \
+  apt-get clean && \
+  rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
+ # mysql config
+RUN sed -i -e"s/^bind-address\s*=\s*127.0.0.1/bind-address = 0.0.0.0/" /etc/mysql/my.cnf
 
-COPY config/php.ini /usr/local/etc/php/
-# 复制php配置文件到Image中
+# nginx config
+RUN sed -i -e"s/keepalive_timeout\s*65/keepalive_timeout 2/" /etc/nginx/nginx.conf
+RUN sed -i -e"s/keepalive_timeout 2/keepalive_timeout 2;\n\tclient_max_body_size 100m/" /etc/nginx/nginx.conf
+RUN echo "daemon off;" >> /etc/nginx/nginx.conf
 
-COPY src/ /var/www/html/
-# 复制代码到Image中
+# php-fpm config
+RUN sed -i -e "s/;cgi.fix_pathinfo=1/cgi.fix_pathinfo=0/g" /etc/php5/fpm/php.ini
+RUN sed -i -e "s/upload_max_filesize\s*=\s*2M/upload_max_filesize = 100M/g" /etc/php5/fpm/php.ini
+RUN sed -i -e "s/post_max_size\s*=\s*8M/post_max_size = 100M/g" /etc/php5/fpm/php.ini
+RUN sed -i -e "s/;daemonize\s*=\s*yes/daemonize = no/g" /etc/php5/fpm/php-fpm.conf
+RUN sed -i -e "s/;catch_workers_output\s*=\s*yes/catch_workers_output = yes/g" /etc/php5/fpm/pool.d/www.conf
+RUN find /etc/php5/cli/conf.d/ -name "*.ini" -exec sed -i -re 's/^(\s*)#(.*)/\1;\2/g' {} \;
 
-RUN docker-php-ext-install mysqli
-# 安装Mysql依赖模块
+# nginx site conf
+ADD ./nginx-site.conf /etc/nginx/sites-available/default
 
+# Supervisor Config
+RUN /usr/bin/easy_install supervisor
+RUN /usr/bin/easy_install supervisor-stdout
+ADD ./supervisord.conf /etc/supervisord.conf
+ADD ./start.sh /start.sh
+RUN chmod 755 /start.sh
+# private expose
+EXPOSE 3306
 EXPOSE 80
+# volume for mysql database and wordpress install
+VOLUME ["/var/lib/mysql", "/usr/share/nginx/www"]
+CMD ["/bin/bash", "/start.sh"]
