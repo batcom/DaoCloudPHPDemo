@@ -19,28 +19,25 @@ RUN \
   apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 4F4EA0AAE5267A6C && \
   apt-get update && \
   apt-get -y upgrade && \
-  apt-get install -y php5-cli php5-fpm php5-mysql php5-pgsql php5-sqlite php5-curl php5-gd php5-mcrypt php5-intl php5-imap php5-tidy php*-pear php5-odbc php5-mhash libmcrypt* libmcrypt-dev php5-common php5-ps php5-snmp php5-json php5-dev libcurl3-openssl-dev php5-imagick php5-memcache php5-pspell php5-recode php5-xmlrpc php5-xsl php5-mongo php5-redis && \
+  apt-get install -y php5-cli php5-fpm php5-mysql php5-pgsql php5-sqlite php5-curl php5-gd php5-mcrypt php5-intl php5-imap php5-tidy php*-pear php5-odbc php5-mhash libmcrypt* libmcrypt-dev php5-common php5-ps php5-json php5-dev libcurl3-openssl-dev php5-imagick php5-memcache php5-pspell php5-recode php5-xmlrpc php5-xsl php5-mongo php5-redis && \
   apt-get install -y supervisor nginx mysql-server mysql-client && \
   apt-get clean && \
   rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
  # mysql config
-RUN sed -i -e"s/^bind-address\s*=\s*127.0.0.1/bind-address = 0.0.0.0/" /etc/mysql/my.cnf
-
+ADD ./my.cnf /etc/mysql/my.cnf
 # nginx config
-RUN sed -i -e"s/keepalive_timeout\s*65/keepalive_timeout 2/" /etc/nginx/nginx.conf
-RUN sed -i -e"s/keepalive_timeout 2/keepalive_timeout 2;\n\tclient_max_body_size 100m/" /etc/nginx/nginx.conf
-RUN echo "daemon off;" >> /etc/nginx/nginx.conf
+ADD ./nginx.conf /etc/nginx/nginx.conf
+ADD ./fastcgi_params /etc/nginx/fastcgi_params
+ADD ./default.conf /etc/nginx/conf.d/default.conf
+RUN chmod 755 -R /usr/share/nginx
+RUN chown nginx:nginx -R /usr/share/nginx
+#php config
+ADD ./php.ini /etc/php5/fpm/php.ini
+ADD ./php-fpm.conf /etc/php5/fpm/php-fpm.conf
+ADD ./www.conf /etc/php5/fpm/pool.d/www.conf
 
-# php-fpm config
-RUN sed -i -e "s/;cgi.fix_pathinfo=1/cgi.fix_pathinfo=0/g" /etc/php5/fpm/php.ini
-RUN sed -i -e "s/upload_max_filesize\s*=\s*2M/upload_max_filesize = 100M/g" /etc/php5/fpm/php.ini
-RUN sed -i -e "s/post_max_size\s*=\s*8M/post_max_size = 100M/g" /etc/php5/fpm/php.ini
-RUN sed -i -e "s/;daemonize\s*=\s*yes/daemonize = no/g" /etc/php5/fpm/php-fpm.conf
-RUN sed -i -e "s/;catch_workers_output\s*=\s*yes/catch_workers_output = yes/g" /etc/php5/fpm/pool.d/www.conf
-RUN find /etc/php5/cli/conf.d/ -name "*.ini" -exec sed -i -re 's/^(\s*)#(.*)/\1;\2/g' {} \;
-
-# nginx site conf
-ADD ./nginx-site.conf /etc/nginx/sites-available/default
+#add src
+COPY src/ /usr/share/nginx/www/
 
 # Supervisor Config
 ADD ./supervisord.conf /etc/supervisord.conf
