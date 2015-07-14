@@ -1,5 +1,5 @@
 # Pull base image.
-FROM phpweb
+FROM batcom/phpweb
 
 # Install.
 #add src
