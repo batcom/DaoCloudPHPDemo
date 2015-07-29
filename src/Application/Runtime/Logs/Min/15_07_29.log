@@ -1,0 +1,102 @@
+[ 2015-07-29T09:41:09+08:00 ] 127.0.0.1 /min/index/php
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000015s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000142s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000154s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000260s ]
+NOTIC: [2048] Declaration of Min\Controller\IndexController::get() should be compatible with that of Think\Controller::get() /Users/mac/www/php/gold/Application/Min/Controller/IndexController.class.php 第 4 行.
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000183s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000289s ]
+
+[ 2015-07-29T09:41:14+08:00 ] 127.0.0.1 /min/index/info
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000041s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000330s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000088s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000170s ]
+NOTIC: [2048] Declaration of Min\Controller\IndexController::get() should be compatible with that of Think\Controller::get() /Users/mac/www/php/gold/Application/Min/Controller/IndexController.class.php 第 4 行.
+ERR: 无法加载数据库驱动: Think\Db\Driver\Pdo
+
+[ 2015-07-29T09:52:43+08:00 ] 127.0.0.1 /min/index/info
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000017s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000136s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000086s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000169s ]
+NOTIC: [2048] Declaration of Min\Controller\IndexController::get() should be compatible with that of Think\Controller::get() /Users/mac/www/php/gold/Application/Min/Controller/IndexController.class.php 第 4 行.
+ERR: could not find driver
+
+[ 2015-07-29T09:53:27+08:00 ] 127.0.0.1 /min/index/info
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000016s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000126s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000080s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000156s ]
+NOTIC: [2048] Declaration of Min\Controller\IndexController::get() should be compatible with that of Think\Controller::get() /Users/mac/www/php/gold/Application/Min/Controller/IndexController.class.php 第 4 行.
+ERR: could not find driver
+
+[ 2015-07-29T09:55:48+08:00 ] 127.0.0.1 /min/index/info
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000017s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000139s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000082s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000162s ]
+NOTIC: [2048] Declaration of Min\Controller\IndexController::get() should be compatible with that of Think\Controller::get() /Users/mac/www/php/gold/Application/Min/Controller/IndexController.class.php 第 4 行.
+ERR: could not find driver
+
+[ 2015-07-29T09:58:21+08:00 ] 127.0.0.1 /min/index/info
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000017s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000132s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000084s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000167s ]
+NOTIC: [2048] Declaration of Min\Controller\IndexController::get() should be compatible with that of Think\Controller::get() /Users/mac/www/php/gold/Application/Min/Controller/IndexController.class.php 第 4 行.
+ERR: could not find driver
+
+[ 2015-07-29T09:58:22+08:00 ] 127.0.0.1 /min/index/info
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000018s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000147s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000084s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000165s ]
+NOTIC: [2048] Declaration of Min\Controller\IndexController::get() should be compatible with that of Think\Controller::get() /Users/mac/www/php/gold/Application/Min/Controller/IndexController.class.php 第 4 行.
+ERR: could not find driver
+
+[ 2015-07-29T09:58:23+08:00 ] 127.0.0.1 /min/index/info
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000016s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000129s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000082s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000164s ]
+NOTIC: [2048] Declaration of Min\Controller\IndexController::get() should be compatible with that of Think\Controller::get() /Users/mac/www/php/gold/Application/Min/Controller/IndexController.class.php 第 4 行.
+ERR: could not find driver
+
+[ 2015-07-29T10:13:42+08:00 ] 127.0.0.1 /min/index/info
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000016s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000127s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000074s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000149s ]
+NOTIC: [2048] Declaration of Min\Controller\IndexController::get() should be compatible with that of Think\Controller::get() /Users/mac/www/php/gold/Application/Min/Controller/IndexController.class.php 第 4 行.
+ERR: could not find driver
+
+[ 2015-07-29T10:13:43+08:00 ] 127.0.0.1 /min/index/info
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000017s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000136s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000080s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000160s ]
+NOTIC: [2048] Declaration of Min\Controller\IndexController::get() should be compatible with that of Think\Controller::get() /Users/mac/www/php/gold/Application/Min/Controller/IndexController.class.php 第 4 行.
+ERR: could not find driver
+

@@ -1,5 +1,5 @@
 <?php
-namespace Home\Controller;
+namespace Min\Controller;
 use Think\Controller;
 class IndexController extends Controller {
     public function index(){
@@ -15,5 +15,9 @@ class IndexController extends Controller {
 
     public function php(){
         phpinfo();
+    }
+
+    public function info(){
+        var_dump(M('college')->select());
     }
 }
