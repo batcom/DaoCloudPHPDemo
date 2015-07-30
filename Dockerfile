@@ -19,7 +19,9 @@ RUN \
   apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 4F4EA0AAE5267A6C && \
   apt-get update && \
   apt-get -y upgrade && \
-  apt-get install -y php5-cli php5-fpm php5-mysql php5-pgsql php5-sqlite php5-curl php5-gd php5-mcrypt php5-intl php5-imap php5-tidy php*-pear php5-odbc php5-mhash libmcrypt* libmcrypt-dev php5-common php5-ps php5-json php5-dev libcurl3-openssl-dev php5-imagick php5-memcache php5-pspell php5-recode php5-xmlrpc php5-xsl php5-mongo php5-redis && \
+  apt-get install -y php5-cli php5-fpm php5-mysql php5-pgsql php5-sqlite php5-curl php5-gd php5-mcrypt php5-intl php5-imap php5-tidy php*-pear php5-odbc php5-mhash libmcrypt* libmcrypt-dev php5-common php5-ps php5-json php5-dev libcurl3-openssl-dev php5-imagick php5-memcache php5-pspell php5-recode php5-xmlrpc php5-xsl php5-mongo php5-redis libevent-dev && \
+  pecl install swoole && \
+  pecl install channel://pecl.php.net/libevent-0.1.0 && \
   apt-get install -y supervisor nginx mysql-server mysql-client && \
   apt-get clean && \
   rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
