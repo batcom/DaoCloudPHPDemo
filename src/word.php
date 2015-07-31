@@ -12,13 +12,14 @@ if($_POST['submit']){
     $bword = $_POST['bword'];
     foreach ($arr as $line){
         if(strstr($line, $bword)){
-            $result[] = $line;
+            $result[$line] = implode(' ',sort(explode(' ',$line)));
         }else{
-            $result[] = $line.' '.$bword;
+            $result[$line.' '.$bword] = implode(' ',sort(explode(' ', $line.' '.$bword)));
         }
     }
+    $result = array_unique($result);
 
-    echo implode('<br>',$result);die;
+    echo implode('<br>',array_keys($result));die;
 }
 ?>
 

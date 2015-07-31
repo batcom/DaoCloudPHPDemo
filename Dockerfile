@@ -35,6 +35,7 @@ RUN chmod 755 -R /usr/share/nginx
 RUN chown nginx:nginx -R /usr/share/nginx
 #php config
 ADD ./php.ini /etc/php5/fpm/php.ini
+ADD ./php.ini /etc/php5/cli/php.ini
 ADD ./php-fpm.conf /etc/php5/fpm/php-fpm.conf
 ADD ./www.conf /etc/php5/fpm/pool.d/www.conf
 
