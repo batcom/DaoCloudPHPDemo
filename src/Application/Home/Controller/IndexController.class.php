@@ -13,6 +13,10 @@ class IndexController extends Controller {
 
     }
 
+    public function ip(){
+        $this->show(get_client_ip(),'utf-8');
+    }
+
     public function php(){
         phpinfo();
     }
