@@ -14,7 +14,9 @@ class IndexController extends Controller {
     }
 
     public function ip(){
-        echo "ip:",get_client_ip();die;
+        echo "ip:",get_client_ip();
+        echo var_export(($_SERVER));
+        die;
     }
 
     public function php(){
