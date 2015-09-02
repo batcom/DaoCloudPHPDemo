@@ -14,7 +14,7 @@ class IndexController extends Controller {
     }
 
     public function ip(){
-        $this->show(get_client_ip(),'utf-8');
+        echo "ip:",get_client_ip();die;
     }
 
     public function php(){
