@@ -29,9 +29,12 @@ function curl_request($url, $sim = true, $method = "get", $postfields = NULL) {
 		curl_close ( $ci );
 			return $response;
 }
-echo curl_request('http://www.uwewe.com/get/signPC.aspx?weweid=9828877');
-$str = <<<EOD
-<?php
-echo date('Y-m-d',time());
-EOD;
-file_put_contents('/usr/share/nginx/www/time.php', $str);
+$urls = array('http://freeios.uwewe.com/get/signPC.aspx?weweid=9828877',
+		'http://actives.youku.com/ac/sign/index?pl=web',
+	);
+$uwewe_get = curl_request('http://freeios.uwewe.com/act/sign.aspx?plat=ios&from=41&weweid=9828877&pwd=0584cb38b57b577faf7a76b481d3e5d3&validate=43dd7a1b8c4e68f55899f1ab84928f71&did=02:00:00:00:00:00&phone=18627092765&required_DFA=19296152-358D-4AFE-9456-FA34D934B35C&required_loc=CN&required_plat=ios&required_mark=41&required_ver=22278');
+preg_match('#<span ID="lbltime" >(\d+)</span>分钟#', $uwewe_get,$match);
+$balance= $match['1'];
+$time = date('Y-n-j%20H:i:s%20Z');
+$task_uwewe = "http://freeios.uwewe.com/get/sign.aspx?action=getsign&ptime=$time&weweid=9828877&balance=$balance.00&from=41&phone=18627092765&version=22278";
+echo curl_request($task_uwewe);
