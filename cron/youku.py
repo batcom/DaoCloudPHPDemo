@@ -23,7 +23,7 @@ def task_youku():
 		res.encoding = 'utf-8'
 		if res.status_code == 200 :
 			doc = pq(res.text)
-			print doc(".signinfo").find('h3').text()
+			print doc(".signinfo").find('h3').text().encode('utf8')
 	except Exception, e:
 		raise
 
@@ -31,5 +31,5 @@ def task_youku():
 if __name__ == '__main__':
 	task_youku()
 	l = ['<?php echo date("Y-m-d H:i:s",time())?>',]
-	f = open('/usr/share/nginx/www/ptime.php','a')
+	f = open('/usr/share/nginx/www/ptime.php','w')
 	f.writelines(l)
