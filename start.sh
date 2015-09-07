@@ -1,5 +1,5 @@
 #!/bin/bash
-cron -f && tail -f /var/log/cron
+cron
 # start all the services
 /usr/bin/supervisord -n -c /etc/supervisord.conf
 read

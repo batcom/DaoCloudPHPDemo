@@ -46,7 +46,7 @@ COPY src/ /usr/share/nginx/www/
 ADD ./supervisord.conf /etc/supervisord.conf
 ADD ./start.sh /start.sh
 ADD ./cron/crontab /etc/crontab
-ADD ./cron/cron.php /root/cron/
+ADD cron/ /root/cron/
 RUN chmod 755 /start.sh
 # private expose
 EXPOSE 3306
