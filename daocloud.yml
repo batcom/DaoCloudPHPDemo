@@ -1,4 +1,4 @@
-image: batcom/phpweb
+image: daocloud.io/batcom/phpweb
 
 services:
   - redis

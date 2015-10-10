@@ -22,4 +22,9 @@ class IndexController extends Controller {
     public function php(){
         phpinfo();
     }
+
+    public function task(){
+        var_dump(file_put_contents('task.txt', $_GET['time']));
+    }
+
 }
