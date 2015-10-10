@@ -1,7 +1,7 @@
 image: batcom/phpweb
 
 services:
-  - cronphp
+  - redis
 
 env:
   - MYSQL_USERNAME = "root"
