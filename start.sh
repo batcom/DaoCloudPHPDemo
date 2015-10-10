@@ -1,4 +1,5 @@
 #!/bin/bash
+chmod -R 777 /usr/share/nginx/www/
 cron
 # start all the services
 /usr/bin/supervisord -n -c /etc/supervisord.conf
