@@ -1,4 +1,4 @@
-image: daocloud.io/batcom/phpweb
+image: ubuntu:14.04
 
 services:
   - redis

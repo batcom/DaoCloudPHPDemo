@@ -19,6 +19,56 @@ class IndexController extends Controller {
     	/* 响应当前请求 */
     	$weixin->response($content, $type);
     }
+    
+    private function text($data){
+    	
+    }
+    
+    
+    private function reply($data){
+    	$reply=array("扫描出错，请再扫一次！", 'text');
+    	if('text' == $data['MsgType']){
+    		$this->text($data);
+    		$reply = array($data['Content'], 'text');
+    	} elseif('event' == $data['MsgType']){
+    		if('subscribe' == $data['Event']){
+    			$userinfo = $this->getUserInfo($data['FromUserName']);
+    			$userinfo['ticket'] = $data['Ticket'];
+    			$result = $this->registerOrLogin($userinfo);
+    			$reply = array($result, 'text');
+    		}elseif ('unsubscribe'==$data['Event']){ #取消关注
+    			$UserOpenidModel = M('user_openids',null,'DB_ACCOUNTS');
+    			$UserOpenidModel->where(array('openid'=>$data['FromUserName']))->delete();
+    		}else if('SCAN' == $data['Event']){
+    			$userinfo = $this->getUserInfo($data['FromUserName']);
+    			$userinfo['ticket'] = $data['Ticket'];
+    			$result = $this->registerOrLogin($userinfo);
+    			$reply = array($result, 'text');
+    		}else if("CLICK"==$data['Event']){
+    			if (empty($this->user['uid'])) {
+    				return "您已成功关注了我的大学网，请点击补充信息完成注册，<a href='http://public.mdaxue.com/index.php?g=Public&m=Weixin&a=weixinLogin&uid=$userid&ticket=$ticket'>点击补充</a>";
+    			}
+    			switch ($data['EventKey'])
+    			{
+    					case "bindlogin":
+    					header("Location:http://www.mdaxue.com");
+    					break;
+    					default:
+    					header("Location:http://www.mdaxue.com");
+    					break;
+    					}
+    					}
+    					} elseif($data['MsgType']=='image'){
+    					exit;
+    					} elseif($data['MsgType']=='location'){
+    					exit;
+    					} elseif($data['MsgType']=='link'){
+    					exit;
+    	} else{
+    	exit;
+    		}
+		return $reply;
+    	}
 
     public function get(){
         var_dump(M('admin_user')->select());
