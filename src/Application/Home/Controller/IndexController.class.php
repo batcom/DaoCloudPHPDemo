@@ -21,7 +21,19 @@ class IndexController extends Controller {
     }
     
     private function text($data){
-    	
+    	$content = $data['Content'];
+    	$ToUserName = $data['ToUserName'];
+    	$createTime = $data['CreateTime'];
+    	$openid = $data['FromUserName'];
+    	$templateTxt = "<xml>
+<ToUserName>$openid</ToUserName>
+<FromUserName>$ToUserName</FromUserName>
+<CreateTime>$createTime</CreateTime>
+<MsgType>text</MsgType>
+<Content>$content</Content>
+</xml>
+    	";
+    	return $templateTxt;
     }
     
     
