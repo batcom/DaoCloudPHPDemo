@@ -12,7 +12,7 @@ RUN \
   apt-key adv --keyserver keyserver.ubuntu.com --recv-keys ABF5BD827BD9BF62 && \
   apt-get update && \
   apt-get -y upgrade && \
-  apt-get install -y build-essential openssh-server openssh-client && \
+  #apt-get install -y build-essential openssh-server openssh-client && \
   apt-get install -y software-properties-common && \
   apt-get install -y curl git htop man unzip vim wget && \
   apt-get install -y libxml2-dev libxslt1-dev python-dev && \
