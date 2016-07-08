@@ -2,6 +2,8 @@
 FROM ubuntu:14.04
 
 # Install.
+RUN \
+apt-get install supervisor
 
 #add src
 COPY src/ /usr/share/nginx/www/
