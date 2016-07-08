@@ -13,7 +13,7 @@ ADD ./nginx.conf /etc/nginx/nginx.conf
 ADD ./fastcgi_params /etc/nginx/fastcgi_params
 ADD ./default.conf /etc/nginx/conf.d/default.conf
 RUN chmod 755 -R /usr/share/nginx
-RUN chown nginx:nginx -R /usr/share/nginx
+RUN chown www-data:www-data -R /usr/share/nginx
 #php config
 ADD ./php.ini /etc/php5/fpm/php.ini
 ADD ./php.ini /etc/php5/cli/php.ini
