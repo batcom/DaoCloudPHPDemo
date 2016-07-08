@@ -3,6 +3,9 @@ FROM ubuntu:14.04
 
 # Install.
 
+#add src
+COPY src/ /usr/share/nginx/www/
+
  # mysql config
 ADD ./my.cnf /etc/mysql/my.cnf
 # nginx config
@@ -16,9 +19,6 @@ ADD ./php.ini /etc/php5/fpm/php.ini
 ADD ./php.ini /etc/php5/cli/php.ini
 ADD ./php-fpm.conf /etc/php5/fpm/php-fpm.conf
 ADD ./www.conf /etc/php5/fpm/pool.d/www.conf
-
-#add src
-COPY src/ /usr/share/nginx/www/
 
 # Supervisor Config
 ADD ./supervisord.conf /etc/supervisord.conf
